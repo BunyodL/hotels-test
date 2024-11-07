@@ -10,18 +10,27 @@ function giveCommonDivisors(numberArray) {
     if (!isEachArrayNumberPositive) {
         return 'Введите положительные числа';
     }
+    if (!numberArray.length) {
+        return "Введите числа";
+    }
 
     const allDivisors = [];
-    numberArray.forEach(num => {
-        for (let j = 2; j <= Math.floor(num / 2); j++) {
-            const isInteger = num % j === 0;
-            if (isInteger) {
-                allDivisors.push(j);
-            }
+    const firstNumber = numberArray[0];
+
+    // добавляем все делители первого числа в allDivisors
+    for (let j = 2; j <= Math.floor(firstNumber / 2); j++) {
+        const isInteger = firstNumber % j === 0;
+        if (isInteger) {
+            allDivisors.push(j);
         }
-    });
+    }
+
+    // добавляем в allDivisors само число на случай, если оно само будет подходить как делитель
+    // например, в случае с числом 6
+    allDivisors.push(firstNumber);
 
     const divisorSet = new Set();
+    // проверяем какие делители подходят для всех чисел
     allDivisors.forEach(div => {
         const isCommonDivisor = numberArray.every(num => num % div === 0);
 
@@ -33,4 +42,4 @@ function giveCommonDivisors(numberArray) {
     return [...divisorSet];
 }
 
-console.log(giveCommonDivisors([42, 12, 18]));
+console.log(giveCommonDivisors([6, 12, 18]));
