@@ -29,17 +29,14 @@ function giveCommonDivisors(numberArray) {
     // например, в случае с числом 6
     allDivisors.push(firstNumber);
 
-    const divisorSet = new Set();
     // проверяем какие делители подходят для всех чисел
-    allDivisors.forEach(div => {
+    return allDivisors.filter(div => {
         const isCommonDivisor = numberArray.every(num => num % div === 0);
 
         if (isCommonDivisor) {
-            divisorSet.add(div);
+            return div;
         }
     });
-
-    return [...divisorSet];
 }
 
-console.log(giveCommonDivisors([6, 12, 18]));
+console.log(giveCommonDivisors([42, 12, 18]));
